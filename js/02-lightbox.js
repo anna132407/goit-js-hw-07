@@ -4,8 +4,8 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 const imagesList = document.querySelector('.gallery');
 
-function createImagesMarkup ({preview, description}){
-  return `<a class="gallery__item" href="large-image.jpg">
+function createImagesMarkup ({preview, original, description}){
+  return `<a class="gallery__item" href="${original}">
   <img class="gallery__image" src="${preview}" alt="${description}" />
 </a>`;
 }

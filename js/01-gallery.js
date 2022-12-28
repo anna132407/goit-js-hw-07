@@ -7,7 +7,7 @@ const imagesList = document.querySelector('.gallery');
 
 function createImagesMarkup ({preview, original,description}){
   return `<div class="gallery__item">
-  <a class="gallery__link" href="large-image.jpg">
+  <a class="gallery__link">
     <img
       class="gallery__image"
       src="${preview}"
@@ -29,25 +29,20 @@ function onImageClick(event) {
     }
   instance.element().querySelector('img').src = event.target.dataset.source;
     instance.show();
+    window.addEventListener('keydown', onEscapeBtnClick);
 
     
 };
 
 function onEscapeBtnClick(event) {
+  console.log(event);
         if (event.code === 'Escape') {
           instance.close();
+          window.removeEventListener('keydown', onEscapeBtnClick);
           return;
         }
 };
 
-gallery.addEventListener('click', onImageClick);
+imagesList.addEventListener('click', onImageClick);
 
-instance = basicLightbox.create(`
-    <img class="gallery__image" src="" width="1280" height="853">
-    `,
-  {
-      show: instance => { window.addEventListener('keydown', onEscapeBtnClick) }
-,
-      close: instance => { window.removeEventListener('keydown', onEscapeBtnClick) },
-  }
-);
+instance = basicLightbox.create(`<img class="gallery__image" src="" width="1280" height="853">`);
